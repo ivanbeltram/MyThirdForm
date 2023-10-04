@@ -41,22 +41,22 @@ object FormServices {
 
     private var questionScreenList = FormRepository().oneForm
 
-    fun mySimulationGetFirstQuestionScreen(): QuestionScreen {
+    private fun mySimulationGetFirstQuestionScreen(): QuestionScreen {
         return findQuestionScreen(1)
     }
 
-    fun findQuestionScreen(id: Int): QuestionScreen {
+    private fun findQuestionScreen(id: Int): QuestionScreen {
         if(questionScreenList.find { it.id == id } == null){
             throw Error("No se encontró la siguiente pregunta.")
         }
         return questionScreenList.find { it.id == id }!!
     }
 
-    fun mySimulationGetNextQuestionScreen(answer: Int): QuestionScreen {
+    private fun mySimulationGetNextQuestionScreen(answer: Int): QuestionScreen {
         return findQuestionScreen(answer)
     }
 
-    fun mySimulationGetResults(userAnswers: MutableList<Option>): Float {
+    private fun mySimulationGetResults(userAnswers: MutableList<Option>): Float {
         var valuesSum: Float = 0f
         userAnswers.forEach { valuesSum += it.value }
         return valuesSum

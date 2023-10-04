@@ -33,7 +33,7 @@ class EditTextAnswerBox(
     override fun checkCompleted(): Boolean {
         val isCompleted = isCompleted()
         if (!isCompleted) {
-            throw Error(context.getString(string.radio_button_answer_box_is_completed_error))
+            throw Error(context.getString(string.edit_text_answer_box_is_completed_error))
         }
         return isCompleted
     }

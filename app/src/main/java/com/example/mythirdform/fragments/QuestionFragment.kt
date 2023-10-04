@@ -50,23 +50,23 @@ class QuestionFragment : Fragment() {
         super.onStart()
 
         binding.buttonPrevious.setOnClickListener {
-            onClickButtonPrevious(binding.root)
+            onClickButtonPrevious()
         }
 
         binding.buttonNext.setOnClickListener {
-            onClickButtonNext(binding.root)
+            onClickButtonNext()
         }
     }
 
-    fun onClickButtonPrevious(view: View) {
+    fun onClickButtonPrevious() {
         if (QuestionFragmentViewModel.getQuestionScreenHistorySize() == 1) {
             QuestionFragmentViewModel.exitQuestionFragment(requireActivity().onBackPressedDispatcher)
         } else {
-            loadPreviousQuestionScreen(view)
+            loadPreviousQuestionScreen()
         }
     }
 
-    fun onClickButtonNext(view: View) {
+    fun onClickButtonNext() {
         val myAnswerBox = myAnswerBoxContainer.getChildAt(0) as AnswerBox
 
         try {
@@ -167,7 +167,11 @@ class QuestionFragment : Fragment() {
         myAnswerBoxContainer.addView(myAnswerBox)
     }
 
-    private fun loadNextQuestionScreen(view: View) {
+    private fun loadPreviousQuestionScreen() {
+        loadQuestionScreen(QuestionFragmentViewModel.getPreviousQuestionScreen())
+    }
+
+    private fun goToNextQuestionScreen() {
         val myAnswerBox = myAnswerBoxContainer.getChildAt(0) as AnswerBox
 
         try {
@@ -176,14 +180,6 @@ class QuestionFragment : Fragment() {
         } catch (e: Error) {
             throwSnackbar(e.message.toString())
         }
-    }
-
-    private fun loadPreviousQuestionScreen(view: View) {
-        loadQuestionScreen(QuestionFragmentViewModel.getPreviousQuestionScreen())
-    }
-
-    private fun goToNextQuestionScreen() {
-        loadNextQuestionScreen(binding.root)
     }
 
     private fun goToResults() {
